@@ -141,6 +141,19 @@ def getClassifications(X_train, y_train, X_test, y_test):
     print("\nERROR RATE: " + str(1-accuracy))
     print(confusion_matrix(y_test, predictions))
 
+    # Used to track which test images were correct, and which were erroneous
+    # to plot a few in the evaluation.
+    i = 0
+    indexes_of_errors = []
+    indexes_of_correct = []
+    for prediction, label in zip(y_test, predictions):
+        if prediction != label:
+            indexes_of_errors.append(i)
+        else:
+            indexes_of_correct.append(i)
+        i += 1
+
+
     # Splits the labels & predictions into their seperate classes to evaluate.
     y_test = np.asarray(np.array_split(y_test, 5))
     predictions = np.asarray(np.array_split(predictions, 5))
@@ -159,6 +172,11 @@ def getClassifications(X_train, y_train, X_test, y_test):
         print("Class Label [" + classes[class_type] + "] Classification Errors: " + str(error_count))
         class_type += 1
     print("\nTotal Classification Errors: " + str(error_total))
+    
+    # To plot which images were right and wrong, for the final step in the evaluation for the report
+    # do cv.imshow(testing_images[indexes_of_correct[0]])
+    # and do cv.imshow(testing_images[indexes_of_errors[0]])
+
 
 
 # Reads images into arrays.
