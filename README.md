@@ -1,0 +1,2 @@
+# COMP338
+SIFT, KNN
